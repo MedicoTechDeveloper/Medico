@@ -1,0 +1,54 @@
+<dx-data-grid #appointmentsGrid 
+    [showBorders]="true"
+    [dataSource]="appointments"
+    [hoverStateEnabled]="true"
+    height="80vh">
+
+    <dxo-scrolling mode="virtual" ></dxo-scrolling>
+    <dxo-grouping #expand [autoExpandAll]="false"></dxo-grouping>
+
+    <dxi-column format="shortDate" [groupIndex]="0" dataType="date" dataField="date" [visible]="false"></dxi-column>
+
+    <dxi-column dataField="appointmentId" [visible]="false"></dxi-column>
+    <dxi-column [allowSorting]="false" dataField="locationName"></dxi-column>
+    <dxi-column [allowSorting]="false" dataField="roomName"></dxi-column>
+    <dxi-column [allowSorting]="false" dataField="physician"></dxi-column>
+    <dxi-column [allowSorting]="false" dataField="nurse"></dxi-column>
+    <dxi-column [allowSorting]="false" alignment="center" dataField="startTime" cellTemplate="startDateTemplate"></dxi-column>
+    <dxi-column [allowSorting]="false" alignment="center" dataField="endTime" cellTemplate="endDateTemplate"></dxi-column>
+    <dxi-column alignment="center" [allowSorting]="false" caption="Status" dataField="appointmentStatus"></dxi-column>
+    <dxi-column alignment="center" [allowSorting]="false" caption="Action" cellTemplate="actionTemplate"></dxi-column>
+
+    <div *dxTemplate="let appointment of 'startDateTemplate'">
+        {{appointment.data.startDate | time}}
+    </div>
+    
+    <div *dxTemplate="let appointment of 'endDateTemplate'">
+        {{appointment.data.endDate | time}}
+    </div>
+
+    <div *dxTemplate="let appointment of 'actionTemplate'">
+        <span *ngIf="!appointment.data.isPatientChartSignedIn">---</span>
+        <div *ngIf="appointment.data.isPatientChartSignedIn" class="btn-group btn-group-sm" role="group">
+            <button title="View report" (click)="showAppointmentReport(appointment.data.appointmentId)"
+                class="btn btn-sm btn-outline-secondary mr-2">
+                <i class="fas fa-eye"></i>
+            </button>
+            <button title="Download report" (click)="downloadAppointmentReport(appointment.data.appointmentId, appointment.data.start)"
+                class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-file-download"></i>
+            </button>
+        </div>
+    </div>
+</dx-data-grid>
+
+<dx-popup class="popup" [width]="1000" [height]="650" [dragEnabled]="false" 
+    [showTitle]="true" title="Report"
+    [closeOnOutsideClick]="false"
+    [(visible)]="isReportPopupOpened">
+    <div *dxTemplate="let data of 'content'">       
+        <dx-scroll-view>
+            <div [innerHtml]="appointmentReportContent | safeHtml" class="col-md-12 p2"></div>
+        </dx-scroll-view>
+    </div>
+</dx-popup>

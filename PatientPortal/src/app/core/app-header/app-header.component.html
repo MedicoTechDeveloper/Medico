@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <span class="navbar-brand">Patient Portal</span>
+    <ul class="navbar-nav mt-2 mt-lg-0 justify-content-end w-100">
+      <li class="nav-item">
+        <a *ngIf="isAppointmentsLinkVisible" class="text-uppercase nav-link" routerLinkActive="active-link" [routerLink]="'/appointments'">Appointments<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="isPatientHistoryLinkVisible" class="nav-link text-uppercase" routerLinkActive="active-link" [routerLink]="'/patient-history'">Patient History</a>
+      </li>
+      <!-- <li *ngIf="isProfileLinkVisible" routerLinkActive="active-link" class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li> -->
+      <li *ngIf="isLogoutLinkVisible" class="nav-item">
+        <a class="nav-link text-uppercase" href="#" (click)="logout($event)">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>

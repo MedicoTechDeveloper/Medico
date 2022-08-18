@@ -1,0 +1,39 @@
+<div class="row mt-2">
+    <div class="col-md-2">
+        <dx-tree-view clss="mt-2" [dataSource]="patientHistoryTreeViewItems"
+            (onItemClick)="selectPatientHistoryTreeViewItem($event)">
+        </dx-tree-view>
+    </div>
+    <div class="col-md-10 p-2">
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.TOBACCO_HISTORY)">
+            <tobacco-history></tobacco-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.ALCOHOL_HISTORY)">
+            <alcohol-history></alcohol-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.DRUG_HISTORY)">
+            <drug-history></drug-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.MEDICAL_HISTORY)">
+            <medical-history></medical-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.SURGICAL_HISTORY)">
+            <surgical-history></surgical-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.FAMILY_HISTORY)">
+            <family-history></family-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.EDUCATION_HISTORY)">
+            <education-history></education-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.OCCUPATIONAL_HISTORY)">
+            <occupational-history></occupational-history>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.ALLERGY)">
+            <allergy></allergy>
+        </div>
+        <div *ngIf="isTreeViewItemOpened(patientHistoryTreeViewItemNames.MEDICATION_HISTORY)">
+            <medication-history></medication-history>
+        </div>
+    </div>
+</div>
